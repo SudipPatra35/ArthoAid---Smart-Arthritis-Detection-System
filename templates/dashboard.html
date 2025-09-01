@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Welcome</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='style2.css') }}"
+    />
+  </head>
+  <body>
+    <!-- Flash messages -->
+    {% with messages = get_flashed_messages(with_categories=true) %} {% if
+    messages %}
+    <div id="flash-container">
+      {% for category, message in messages %}
+      <div class="flash-message flash-{{ category }}">{{ message }}</div>
+      {% endfor %}
+    </div>
+    {% endif %} {% endwith %}
+
+    <h1>Welcome to ArthoAid</h1>
+
+    <div class="tablet-screen">
+      <h2>Health Record Input</h2>
+      <form method="POST" action="/predict" enctype="multipart/form-data">
+        <label for="age">Age</label>
+        <input type="number" name="age" id="age" required />
+
+        <label for="rf">RF</label>
+        <input type="number" step="any" name="rf" id="rf" required />
+
+        <label for="anti_ccp">Anti-CCP</label>
+        <input
+          type="number"
+          step="any"
+          name="anti_ccp"
+          id="anti_ccp"
+          required
+        />
+
+        <label for="esr">ESR</label>
+        <input type="number" step="any" name="esr" id="esr" required />
+
+        <label for="anti_ccp">CRP</label>
+        <input type="number" step="any" name="crp" id="crp" required />
+
+        <label for="joint_pain">Joint Pain Score</label>
+        <input type="number" name="joint_pain" id="joint_pain" required />
+
+        <label for="stiffness">Morning Stiffness (Minutes)</label>
+        <input type="number" name="stiffness" id="stiffness" required />
+
+        <label for="sex">Sex</label>
+        <select name="sex" id="sex" required autocomplete="off">
+          <option value="" disabled selected>Select</option>
+          <option value="1">Male</option>
+          <option value="0">Female</option>
+        </select>
+
+        <label for="swelling">Swelling</label>
+        <select name="swelling" id="swelling" required autocomplete="off">
+          <option value="" disabled selected>Select</option>
+          <option value="1">Yes</option>
+          <option value="0">No</option>
+        </select>
+
+        
+        <button type="submit">Submit</button>
+      </form>
+    </div>
+    
+
+<!-- Prediction Result Section Outside Tablet -->
+{% if input_data is defined %}
+  <div id="prediction-result" class="prediction-box">
+    <button id="close-btn" 
+            style="position: absolute; top: 8px; right: 8px; background: transparent; border: none; font-size: 20px; cursor: pointer;">
+      &times;
+    </button>
+    <h3>Prediction Result</h3>
+    <p>
+      {% if input_data == 0 %}
+        ✅ The prediction result indicates: <strong>Healthy</strong>.
+      {% elif input_data == 1 %}
+        ⚠️ The prediction result indicates: <strong>Osteoarthritis (OA)</strong>.
+      {% elif input_data == 2 %}
+        ⚠️ The prediction result indicates: <strong>Rheumatoid Arthritis (RA)</strong>.
+      {% else %}
+        ❓ Unknown prediction result.
+      {% endif %}
+    </p>
+
+    {% if input_data == 1 %}
+    <!-- X-Ray Upload Form -->
+    <form method="POST" action="/upload_xray" enctype="multipart/form-data">
+      <label for="has_xray">Do you have an X-Ray?</label>
+      <select name="has_xray" id="has_xray" required onchange="toggleXrayUpload()">
+        <option value="" disabled selected>Select</option>
+        <option value="1">Yes</option>
+        <option value="0">No</option>
+      </select>
+
+      <div id="xray-upload-box" style="display: none;">
+        <label for="xray_image">Upload X-Ray</label>
+        <input type="file" name="xray_image" id="xray_image" accept="image/*" />
+      </div>
+
+      <button type="submit">Upload & Re-analyze</button>
+    </form>
+    {% endif %}
+  </div>
+  <script>
+    document.getElementById('close-btn').addEventListener('click', function() {
+      document.getElementById('prediction-result').style.display = 'none';
+    });
+  </script>
+{% endif %}
+
+{% if result is defined %}
+  <div id="cnn-prediction-result" class="prediction-box">
+    <button id="close-btn" 
+            style="position: absolute; top: 8px; right: 8px; background: transparent; border: none; font-size: 20px; cursor: pointer;">
+      &times;
+    </button>
+    <h3>📷 X-Ray Based Prediction</h3>
+    <p>
+       Based on your X-ray, the prediction result is: <strong>{{ result }}</strong>.
+    </p>
+  </div>
+  <script>
+    document.getElementById('close-btn').addEventListener('click', function() {
+      document.getElementById('cnn-prediction-result').style.display = 'none';
+    });
+  </script>
+{% endif %}
+
+
+<script>// Auto-hide flash messages after 5 seconds
+  setTimeout(() => {
+    const flashMessages = document.getElementById('flash-container');
+    if (flashMessages) {
+      flashMessages.style.transition = "opacity 1s ease";
+      flashMessages.style.opacity = '0';
+      setTimeout(() => flashMessages.remove(), 500);
+    }
+  }, 5000);
+</script>
+
+<script> // XRAY Upload
+  function toggleXrayUpload() {
+    const select = document.getElementById('has_xray');
+    const uploadBox = document.getElementById('xray-upload-box');
+    if (select && uploadBox) {
+      uploadBox.style.display = select.value === "1" ? "block" : "none";
+    }
+  }
+</script>
+
+<script>
+  window.onload = function () {
+    const cnnPrediction = document.getElementById("cnn-prediction-result");
+    const prediction = document.getElementById("prediction-result");
+
+    if (cnnPrediction) {
+      cnnPrediction.scrollIntoView({ behavior: "smooth", block: "start" });
+    } else if (prediction) {
+      prediction.scrollIntoView({ behavior: "smooth", block: "start" });
+    }
+  };
+</script>
+
+
+  </body>
+</html>

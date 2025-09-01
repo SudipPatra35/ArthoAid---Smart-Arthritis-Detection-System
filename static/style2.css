@@ -1,0 +1,203 @@
+body {
+  margin: 0;
+  font-family: "Segoe UI", sans-serif;
+  background: url("dashboard.png") no-repeat center center fixed;
+  background-size: cover;
+  background-attachment: fixed;
+  height: 100vh;
+  width: 100vw;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  padding-top: 120px;
+  
+  box-sizing: border-box;
+  /* overflow: auto; */
+  overflow-x: hidden;
+}
+
+h1 {
+  font-family: "Orbitron", sans-serif;
+  font-size: 48px;
+  font-weight: 700;
+  color: #e4dfa4b2;
+  text-align: center;
+  text-shadow:
+    0 0 5px #71d77f,
+    0 0 10px #71d77f,
+    0 0 20px #71d77f,
+    0 0 30px #71d77f;
+  margin: 0;
+  position: absolute;
+  top: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 10;
+  background-color: rgba(0, 0, 0, 0.3);
+  padding: 10px 20px;
+  border-radius: 10px;
+  backdrop-filter: blur(5px);
+}
+
+.tablet-screen {
+  width: 90%;
+  max-width: 720px;
+  /* max-height: 80vh; */
+  /* overflow-y: auto; */
+  background: rgba(128, 0, 255, 0.15);
+  backdrop-filter: blur(15px);
+  padding: 40px 30px;
+  border-radius: 20px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+  color: #ffffff;
+  text-align: left;
+  box-sizing: border-box;
+  margin-bottom: 20px;
+}
+
+/* Form styles */
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+form label {
+  font-size: 14px;
+  font-weight: 600;
+  color: #e0e0e0;
+}
+
+form input,
+form select {
+  padding: 12px;
+  border-radius: 10px;
+  border: none;
+  background: rgba(255, 255, 255, 0.95);
+  font-size: 14px;
+  outline: none;
+  color: #000;
+  box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.1);
+}
+
+form input[type="file"] {
+  background: rgba(255, 255, 255, 0.8);
+  color: #000;
+  border: 1px dashed #ccc;
+  padding: 10px;
+  font-size: 14px;
+}
+
+form button {
+  margin-top: 20px;
+  padding: 14px;
+  font-size: 16px;
+  border-radius: 25px;
+  border: none;
+  cursor: pointer;
+  background: linear-gradient(90deg, #6a11cb 0%, #2575fc 100%);
+  color: white;
+  font-weight: bold;
+  transition: all 0.3s ease-in-out;
+}
+
+form button:hover {
+  opacity: 0.9;
+  transform: scale(1.02);
+}
+
+/* X-ray upload section */
+#xray-upload-box {
+  display: none;
+  transition: all 0.3s ease-in-out;
+}
+select:invalid {
+  color: #999;
+}
+
+select option[disabled][selected] {
+  color: #999;
+}
+
+ #xray-upload-box {
+      display: none;
+      margin-top: 10px;
+    }
+
+    /* Flash message container */
+    .flash-message {
+      max-width: 600px;
+      margin: 15px auto;
+      padding: 15px 20px;
+      border-radius: 8px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+      font-weight: 600;
+      font-family: 'Orbitron', sans-serif;
+      font-size: 1.1rem;
+      opacity: 1;
+      transition: opacity 1s ease-out;
+      animation: fadein 0.5s;
+    }
+
+    /* Color variations */
+    .flash-success {
+      background-color: #d4edda;
+      color: #155724;
+      border: 1.5px solid #c3e6cb;
+    }
+    .flash-danger {
+      background-color: #f8d7da;
+      color: #721c24;
+      border: 1.5px solid #f5c6cb;
+    }
+    .flash-warning {
+      background-color: #fff3cd;
+      color: #856404;
+      border: 1.5px solid #ffeeba;
+    }
+    .flash-info {
+      background-color: #d1ecf1;
+      color: #0c5460;
+      border: 1.5px solid #bee5eb;
+    }
+
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: scale(0.95); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+.prediction-box {
+ width: 90%;
+  max-width: 720px;
+  /* max-height: 80vh; */
+  /* overflow-y: auto; */
+  background: rgba(0, 213, 255, 0.15);
+  backdrop-filter: blur(15px);
+  padding: 40px 30px;
+  border-radius: 20px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+  color: #ffffff;
+  text-align: left;
+  box-sizing: border-box;
+  margin-bottom: 20px;
+}
+
+.cnn-prediction-result {
+ width: 90%;
+  max-width: 720px;
+  /* max-height: 80vh; */
+  /* overflow-y: auto; */
+  background: rgba(0, 213, 255, 0.15);
+  backdrop-filter: blur(15px);
+  padding: 40px 30px;
+  border-radius: 20px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+  color: #ffffff;
+  text-align: left;
+  box-sizing: border-box;
+  margin-bottom: 20px;
+
+}
+ 
