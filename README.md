@@ -116,17 +116,12 @@ Both models show strong real-world performance, reducing misdiagnosis and ensuri
 ## ⚙️ Installation  
 
 ### 1️⃣ Clone the repo & Install Dependencies  
-```bash
-# Clone the repository
-git clone https://github.com/your-username/ArthoAid.git
-cd ArthoAid
+      #Clone the repository
+      git clone https://github.com/your-username/ArthoAid.git
+      cd ArthoAid
+        
+      #Install dependencies
+      pip install -r requirements.txt
 
-# Install dependencies
-pip install -r requirements.txt
-
-
-
-### ▶️ Run the App
-```bash
-python app.py
+---
 
