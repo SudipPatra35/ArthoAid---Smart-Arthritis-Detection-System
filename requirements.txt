@@ -1,0 +1,23 @@
+# Core Libraries
+numpy==1.26.4
+pandas==2.2.2
+scikit-learn==1.5.0
+joblib==1.4.2
+
+# Deep Learning
+tensorflow==2.16.1
+keras==3.3.3
+
+# Image Processing
+opencv-python==4.10.0.84
+Pillow==10.3.0
+
+# Visualization
+matplotlib==3.9.0
+
+# Web Framework
+flask==3.0.3
+flask-cors==4.0.1
+
+# Others
+gunicorn==22.0.0     # for deployment (Heroku/Render/etc.)
